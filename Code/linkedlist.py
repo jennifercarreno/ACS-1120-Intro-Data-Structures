@@ -84,12 +84,17 @@ class LinkedList:
         # TODO: Create new node to hold given item
         new_node = Node(item)
         # TODO: Prepend node before head, if it exists
-        if self.is_empty==False:
+        if not self.is_empty():
             self.head = new_node
             self.head.next = self.head
+            self.head.data = new_node
         else:
             new_node = self.head
             self.tail = new_node
+            self.head.data = new_node
+            self.tail.data = new_node
+
+
 
     def find(self, item):
         """Return an item from this linked list if it is present.
@@ -97,7 +102,7 @@ class LinkedList:
         TODO: Worst case running time: O(???) Why and under what conditions?"""
         # TODO: Loop through all nodes to find item, if present return True otherwise False
 
-        while self.is_empty == False:
+        while not self.is_empty():
             if self.node.data == item:
                 return True
             else: 
