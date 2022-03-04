@@ -1,7 +1,7 @@
 import os
 import dotenv
-from tokens import tokenize
-from markovchain import Markov_chain
+from Code.tokens import tokenize
+from Code.markovchain import Markov_chain
 dotenv.load_dotenv('.env')
 
 consumer_key = os.environ.get('TWITTER_CONSUMER_KEY')

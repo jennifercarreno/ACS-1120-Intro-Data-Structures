@@ -1,8 +1,8 @@
 
 from Code.dictogram import Dictogram
-from tokens import tokenize
+from Code.tokens import tokenize
 from random import choice, random
-from cleanup import cleanup
+from Code.cleanup import cleanup
 
 class Markov_chain():
     

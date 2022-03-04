@@ -1,10 +1,10 @@
 """Main script, uses other modules to generate sentences."""
 from curses import flash
 from flask import Flask, render_template, redirect
-from tokens import tokenize
-from markovchain import Markov_chain
+from Code.tokens import tokenize
+from Code.markovchain import Markov_chain
 from flask import request
-import twitter
+import Code.twitter as twitter
 
 
 app = Flask(__name__)
