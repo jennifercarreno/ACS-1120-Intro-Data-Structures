@@ -44,7 +44,7 @@ class HashTable(object):
         # TODO: Loop through all buckets
         values = []
         for bucket in self.buckets:
-            for value in bucket.items():
+            for key, value in bucket.items():
                 values.append(value)
         return values
 
@@ -117,10 +117,9 @@ class HashTable(object):
         # TODO: Find bucket where given key belongs
         for bucket in self.buckets():
             if bucket.key() == key:
-                if bucket.value is not None:
-                    print("key deleted")
-                else:
-                    raise KeyError('Key not found: {}'.format(key))
+                bucket.key.delete()
+            else:
+                raise KeyError('Key not found: {}'.format(key))
         # TODO: Check if key-value entry exists in bucket
         # TODO: If found, delete entry associated with given key
         # TODO: Otherwise, raise error to tell user delete failed

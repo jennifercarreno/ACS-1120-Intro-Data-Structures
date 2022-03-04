@@ -52,6 +52,7 @@ class Markov_chain():
         for word in words:
             sentence += word + ' '
         
+        sentence = sentence.capitalize() + "."
         return sentence
     
     def choose_next_word(self, pair):

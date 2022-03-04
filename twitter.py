@@ -27,7 +27,8 @@ sentence = markov.walk()
 status = sentence
 
 # Send a POST request to the url with a 'status' parameter
-resp = session.post(url, json={ 'text': status })
+def tweet(status):
+    resp = session.post(url, json={ 'text': status })
 
 # Show the text from the response
-print(resp.text)
+    print(resp.text)

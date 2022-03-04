@@ -55,9 +55,11 @@ class LinkedList:
         TODO: Running time: O(n) Why and under what conditions?"""
         # TODO: Loop through all nodes and count one for each
         length = 0
-        for item in self.items():
-            length += 1
-        return print(length)
+        while self.head is not None:
+            self.head = self.head.next
+            length +=1
+       
+        return length
 
     def append(self, item):
         """Insert the given item at the tail of this linked list.
@@ -83,10 +85,10 @@ class LinkedList:
         new_node = Node(item)
         # TODO: Prepend node before head, if it exists
         if self.is_empty==False:
+            self.head = new_node
             self.head.next = self.head
-            self.head = new_node
         else:
-            self.head = new_node
+            new_node = self.head
             self.tail = new_node
 
     def find(self, item):
@@ -107,11 +109,31 @@ class LinkedList:
         TODO: Worst case running time: O(???) Why and under what conditions?"""
         # TODO: Loop through all nodes to find one whose data matches given item
 
-        while self.is_empty == False:
-            if self.node.data == item:
-                self.node.previous = self.node.next
-            else: 
+        if self.find(item):
+
+            if self.head.data == item and self.tail.data == item:
+                    self.head = None
+                    self.tail = None
+                    return
+            
+            if self.head.data == item:
+                    self.head = self.head.next
+                    return
+                
+            if self.tail.data == item:
+
+                node = self.head
+                while node is not None:
+                    if node.next is item:
+                        self.tail = node
+                    else: 
+                        node = node.next
+
+                self.tail.next = None
+                return
+        else: 
                 raise ValueError('Item not found: {}'.format(item))
+
         # TODO: Update previous node to skip around node with matching data
         # TODO: Otherwise raise error to tell user that delete has failed
         # Hint: raise ValueError('Item not found: {}'.format(item))

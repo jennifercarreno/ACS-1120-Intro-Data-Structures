@@ -1,7 +1,10 @@
 """Main script, uses other modules to generate sentences."""
-from flask import Flask
+from curses import flash
+from flask import Flask, render_template, redirect
 from tokens import tokenize
 from markovchain import Markov_chain
+from flask import request
+import twitter
 
 
 app = Flask(__name__)
@@ -21,9 +24,13 @@ def home():
     source = tokenize(corpus)    
     markov = Markov_chain(source)
     sentence = markov.walk()
-    return sentence
+    return render_template('index.html', sentence = sentence)
 
-
+@app.route('/tweet', methods=['POST'])
+def tweet():
+    status = request.form['sentence']
+    twitter.tweet(status)
+    return redirect('/')
 
 if __name__ == "__main__":
     app.run(debug=True)
