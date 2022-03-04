@@ -2,7 +2,7 @@ from tkinter import W
 import urllib.parse
 
 clean_chars = [] 
-bad_chars = "-*_[].:»?!'"
+bad_chars = "-*_[].:»?!',;""@#$%^&*()1234567890"
 
 def cleanup(f):
     old_file = open(f, "r")
@@ -23,7 +23,7 @@ def cleanup(f):
 
 def test(f):
     old_file = open(f, "r")
-    clean_file = open("clean_corpus", "w")
+    clean_file = open("clean_corpus.txt", "w")
     for line in old_file:
         for word in line:
             for char in word:
