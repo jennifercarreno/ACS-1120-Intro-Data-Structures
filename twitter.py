@@ -1,6 +1,7 @@
 import os
 import dotenv
-
+from tokens import tokenize
+from markovchain import Markov_chain
 dotenv.load_dotenv('.env')
 
 consumer_key = os.environ.get('TWITTER_CONSUMER_KEY')
@@ -19,7 +20,11 @@ session = OAuth1Session(consumer_key,
 url = 'https://api.twitter.com/2/tweets'
 
 # The contents of status (i.e. tweet text)
-status = 'If you are reading this on Twitter, the API request worked! twice'
+corpus = open("clean_corpus.txt", "r").read()
+source = tokenize(corpus)    
+markov = Markov_chain(source)
+sentence = markov.walk()
+status = sentence
 
 # Send a POST request to the url with a 'status' parameter
 resp = session.post(url, json={ 'text': status })

@@ -1,7 +1,5 @@
 """Main script, uses other modules to generate sentences."""
-import imp
 from flask import Flask
-import histogram, sample
 from tokens import tokenize
 from markovchain import Markov_chain
 
@@ -28,7 +26,4 @@ def home():
 
 
 if __name__ == "__main__":
-    """To run the Flask server, execute `python app.py` in your terminal.
-       To learn more about Flask's DEBUG mode, visit
-       https://flask.palletsprojects.com/en/2.0.x/server/#in-code"""
     app.run(debug=True)

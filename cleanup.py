@@ -1,6 +1,3 @@
-from tkinter import W
-import urllib.parse
-
 clean_chars = [] 
 bad_chars = "-*_[].:»?!',;""@#$%^&*()1234567890"
 
