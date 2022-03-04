@@ -56,8 +56,8 @@ class LinkedList:
         # TODO: Loop through all nodes and count one for each
         length = 0
         while self.head is not None:
-            self.head = self.head.next
             length +=1
+            self.head = self.head.next
        
         return length
 
@@ -65,34 +65,32 @@ class LinkedList:
         """Insert the given item at the tail of this linked list.
         TODO: Running time: O(???) Why and under what conditions?"""
         # Create new node to hold given item
-        new_node = Node(item)
+        node = Node(item)
         # If self.is_empty() == True set the head and the tail to the new node
-        if self.is_empty() == True:
-            self.head = new_node
-            self.tail = new_node
+        if self.head is None:
+            self.head = node
+            self.tail = node
         # Else append node after tail
         # add new node to end (after tail node), update tail so that the new node = tail
 
         else:
-            self.tail.next = new_node
-            self.tail = new_node
+            self.tail.next = node
+            self.tail = node
             
 
     def prepend(self, item):
         """Insert the given item at the head of this linked list.
         TODO: Running time: O(???) Why and under what conditions?"""
         # TODO: Create new node to hold given item
-        new_node = Node(item)
+        node = Node(item)
         # TODO: Prepend node before head, if it exists
-        if not self.is_empty():
-            self.head = new_node
-            self.head.next = self.head
-            self.head.data = new_node
+        if self.is_empty():
+            self.head = node
+            self.tail = node
+            # self.head.data = new_node
         else:
-            new_node = self.head
-            self.tail = new_node
-            self.head.data = new_node
-            self.tail.data = new_node
+            node.next = self.head
+            self.head = node
 
 
 
@@ -101,12 +99,14 @@ class LinkedList:
         TODO: Best case running time: O(???) Why and under what conditions?
         TODO: Worst case running time: O(???) Why and under what conditions?"""
         # TODO: Loop through all nodes to find item, if present return True otherwise False
+        node = self.head
 
-        while not self.is_empty():
-            if self.node.data == item:
+        while node is not None:
+            if node.data == item:
                 return True
-            else: 
-                return False
+            node = node.next
+         
+        return False
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
@@ -114,9 +114,9 @@ class LinkedList:
         TODO: Worst case running time: O(???) Why and under what conditions?"""
         # TODO: Loop through all nodes to find one whose data matches given item
 
-        if self.find(item):
+        if not self.find(item) or self.is_empty():
 
-            if self.head.data == item and self.tail.data == item:
+            if self.head == item and self.tail == item:
                     self.head = None
                     self.tail = None
                     return
@@ -137,7 +137,7 @@ class LinkedList:
                 self.tail.next = None
                 return
         else: 
-                raise ValueError('Item not found: {}'.format(item))
+            raise ValueError('Item not found: {}'.format(item))
 
         # TODO: Update previous node to skip around node with matching data
         # TODO: Otherwise raise error to tell user that delete has failed
