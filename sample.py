@@ -1,6 +1,6 @@
 from json.tool import main
 import random
-import histogram
+import Code.histogram as histogram
 
 # chooses a random word from the list of words in the histogram
 def sample(source_text):

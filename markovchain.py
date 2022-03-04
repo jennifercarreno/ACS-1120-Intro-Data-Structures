@@ -1,5 +1,5 @@
 
-from dictogram import Dictogram
+from Code.dictogram import Dictogram
 from tokens import tokenize
 from random import choice, random
 from cleanup import cleanup
