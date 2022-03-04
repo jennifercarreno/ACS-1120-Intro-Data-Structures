@@ -1,35 +1,33 @@
 from cgitb import text
 from flask import request
 import requests
-import urllib.parse
-
-# TODO: 
-# set api url
-# loop through pages urls
-# encode the urls
 
 
-url = 'https://api.diffbot.com/v3/article?token=8d3acea2ef52e3efe3ea220f4b6284c3&url=http%3A%2F%2Fblog.diffbot.com%2Fdiffbots-new-product-api-teaches-robots-to-shop-online'
+DIFFBOT_API_URL = 'http://api.diffbot.com/v3/article'
+DIFFBOT_DEV_TOKEN = '8d3acea2ef52e3efe3ea220f4b6284c3'
 
-# x = requests.get(url).text
-# print(x)
+def get_article(line):
+    params = { 'token': DIFFBOT_DEV_TOKEN,
+                'url':line,
+                'discussion': 'false' }
 
-token = '8d3acea2ef52e3efe3ea220f4b6284c3'
+    res = requests.get(DIFFBOT_API_URL, params)
+    res_obj = res.json()['objects'][0]         
 
-def create_corpus():
-    api_url = 'https://api.diffbot.com/v3/article?token=8d3acea2ef52e3efe3ea220f4b6284c3&url='
-    corpus = open("corpus.txt", "a")
-    pages = open("pages.txt", "r")
-
-    for line in pages:
-        line = urllib.parse.quote(pages.readline())
-        new_url = api_url+line
-        text = requests.get(new_url).text
-        corpus.write(text+"\n")
-    corpus.close()
-    pages.close()
+    return res_obj['text'] 
 
 
 if __name__ == '__main__':
-    create_corpus()
-    
+    import sys
+    urls_file = open("pages.txt", "r")
+    output_file = open('corpus.txt', 'w')
+
+    corpus = ''
+
+    for line in urls_file:
+        url = line.strip() 
+        article = get_article(url)
+        corpus += article
+
+    output_file.write(corpus)
+    print('Corpus saved to {}'.format(output_file.name))
