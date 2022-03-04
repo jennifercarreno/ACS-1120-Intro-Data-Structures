@@ -1,6 +1,9 @@
 """Main script, uses other modules to generate sentences."""
+import imp
 from flask import Flask
 import histogram, sample
+from tokens import tokenize
+from markovchain import Markov_chain
 
 
 app = Flask(__name__)
@@ -10,14 +13,17 @@ app = Flask(__name__)
 def before_first_request():
     """Runs only once at Flask startup"""
     # TODO: Initialize your histogram, hash table, or markov chain here.
-    histogram.histogram("clean_corpus.txt")
+    # histogram.histogram("clean_corpus.txt")
 
 
 @app.route("/")
 def home():
     """Route that returns a web page containing the generated text."""
-    word = sample.sample("clean_corpus.txt")
-    return word
+    corpus = open("clean_corpus.txt", "r").read()
+    source = tokenize(corpus)    
+    markov = Markov_chain(source)
+    sentence = markov.walk()
+    return sentence
 
 
 

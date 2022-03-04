@@ -19,7 +19,7 @@ session = OAuth1Session(consumer_key,
 url = 'https://api.twitter.com/2/tweets'
 
 # The contents of status (i.e. tweet text)
-status = 'If you are reading this on Twitter, the API request worked!'
+status = 'If you are reading this on Twitter, the API request worked! twice'
 
 # Send a POST request to the url with a 'status' parameter
 resp = session.post(url, json={ 'text': status })
