@@ -30,13 +30,15 @@ class Dictogram(dict):
         dic_word = self.get(word)
         self.tokens += 1
 
-        if dic_word is not None:
+        if word in self:
             self[word] += count 
             # count = how many times the word appears
             
         else:
-            self[word] = count
+            self[word]=count
             self.types += 1
+        self.tokens += 1
+
         
         
 
