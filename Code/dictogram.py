@@ -28,7 +28,6 @@ class Dictogram(dict):
         # look for da word and add a number to it 
         # self is treated as a dictionary 
         dic_word = self.get(word)
-        self.tokens += 1
 
         if word in self:
             self[word] += count 
