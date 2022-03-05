@@ -27,16 +27,15 @@ class Dictogram(dict):
         # how many times the word appears 
         # look for da word and add a number to it 
         # self is treated as a dictionary 
-        dic_word = self.get(word)
 
         if word in self:
-            self[word] += count 
+            self[word] = self[word] + count 
             # count = how many times the word appears
             
         else:
             self[word]=count
             self.types += 1
-        self.tokens += 1
+        self.tokens += count
 
         
         
